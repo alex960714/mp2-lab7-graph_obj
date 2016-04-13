@@ -1,5 +1,6 @@
 #pragma once
 #include "THeadList.h"
+#include "T_Stack.h"
 
 namespace Graph_obj
 {
@@ -334,13 +335,76 @@ namespace Graph_obj
 	{
 	protected:
 		TObject *begin, *end;
+		struct TChartLine
+		{
+			TChart *pLine;
+			TPoint *pFp, *pLp;
+		};
+		T_Stack <TChartLine> st;
 	public:
 		TObject* GetFirst() { return begin; }
 		TObject* GetLast() { return end; }
 		void SetFirst(TObject *p) { begin = p; }
 		void SetLast(TObject *p) { end = p; }
 
-		
+		virtual void Draw(Graphics^ gr)
+		{
+			TChartLine CurrLine;
+			TPoint *q;
+			TObject *t;
+			st.Clear();
+			CurrLine.pLine = this;
+			CurrLine.pFp = CurrLine.pLp = NULL;
+			st.Push(CurrLine);
+			while (!st.IsEmpty())
+			{
+				CurrLine = st.Pop();
+				while (CurrLine.pFp == NULL)
+				{
+					t = this->GetFirst();
+					q = dynamic_cast <TPoint*>(t);
+					if (q != NULL)
+					{
+						CurrLine.pFp = q;
+					}
+					else
+					{
+						st.Push(CurrLine);
+						CurrLine.pLine = dynamic_cast <TChart*>(t);
+					}
+				}
+				if (CurrLine.pLp == NULL)
+				{
+					t = this->GetLast();
+					q = dynamic_cast <TPoint*>(t);
+					if (q != NULL)
+					{
+						CurrLine.pLp = q;
+					}
+					else
+					{
+						st.Push(CurrLine);
+						CurrLine.pLine = dynamic_cast <TChart*>(t);
+						CurrLine.pFp = NULL;
+						st.Push(CurrLine);
+					}
+				}
+				if ((CurrLine.pFp != NULL) && (CurrLine.pLp != NULL))
+				{
+					gr->DrawLine(Pens::Black, CurrLine.pFp->GetX(gr), CurrLine.pFp->GetY(gr), CurrLine.pLp->GetX(gr), CurrLine.pLp->GetY(gr));
+					if (!st.IsEmpty())
+					{
+						q = CurrLine.pLp;
+						CurrLine = st.Pop();
+						if (CurrLine.pFp == NULL)
+							CurrLine.pFp = q;
+						else
+							CurrLine.pLp = q;
+						st.Push(CurrLine);
+					}
+				}
+			}
+		}
 	};
 
 }
