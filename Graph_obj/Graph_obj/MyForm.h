@@ -108,11 +108,9 @@ namespace Graph_obj {
 			this->pictureBox1->Size = System::Drawing::Size(465, 287);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
-			this->pictureBox1->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MyForm::pictureBox1_DragDrop);
-			this->pictureBox1->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &MyForm::pictureBox1_DragEnter);
-			this->pictureBox1->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &MyForm::pictureBox1_DragOver);
 			this->pictureBox1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::pictureBox1_Paint);
 			this->pictureBox1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::pictureBox1_MouseDown);
+			this->pictureBox1->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::pictureBox1_MouseMove);
 			this->pictureBox1->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::pictureBox1_MouseUp);
 			// 
 			// menuStrip1
@@ -123,7 +121,7 @@ namespace Graph_obj {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(551, 24);
+			this->menuStrip1->Size = System::Drawing::Size(583, 24);
 			this->menuStrip1->TabIndex = 1;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -191,14 +189,14 @@ namespace Graph_obj {
 			// íàðèñîâàòüToolStripMenuItem
 			// 
 			this->íàðèñîâàòüToolStripMenuItem->Name = L"íàðèñîâàòüToolStripMenuItem";
-			this->íàðèñîâàòüToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->íàðèñîâàòüToolStripMenuItem->Size = System::Drawing::Size(139, 22);
 			this->íàðèñîâàòüToolStripMenuItem->Text = L"Íàðèñîâàòü";
 			this->íàðèñîâàòüToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::íàðèñîâàòüToolStripMenuItem_Click);
 			// 
 			// äâèæåíèåToolStripMenuItem
 			// 
 			this->äâèæåíèåToolStripMenuItem->Name = L"äâèæåíèåToolStripMenuItem";
-			this->äâèæåíèåToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->äâèæåíèåToolStripMenuItem->Size = System::Drawing::Size(139, 22);
 			this->äâèæåíèåToolStripMenuItem->Text = L"Äâèæåíèå";
 			this->äâèæåíèåToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::äâèæåíèåToolStripMenuItem_Click);
 			// 
@@ -207,7 +205,7 @@ namespace Graph_obj {
 			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button1->Location = System::Drawing::Point(473, 36);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->Size = System::Drawing::Size(98, 23);
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"Ìûøü";
 			this->button1->UseVisualStyleBackColor = true;
@@ -218,7 +216,7 @@ namespace Graph_obj {
 			this->button2->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button2->Location = System::Drawing::Point(473, 66);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->Size = System::Drawing::Size(98, 23);
 			this->button2->TabIndex = 3;
 			this->button2->Text = L"Òî÷êà";
 			this->button2->UseVisualStyleBackColor = true;
@@ -229,7 +227,7 @@ namespace Graph_obj {
 			this->button3->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button3->Location = System::Drawing::Point(473, 96);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->Size = System::Drawing::Size(98, 23);
 			this->button3->TabIndex = 4;
 			this->button3->Text = L"Ëèíèÿ";
 			this->button3->UseVisualStyleBackColor = true;
@@ -240,7 +238,7 @@ namespace Graph_obj {
 			this->button4->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button4->Location = System::Drawing::Point(473, 126);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(75, 23);
+			this->button4->Size = System::Drawing::Size(98, 23);
 			this->button4->TabIndex = 5;
 			this->button4->Text = L"Îêðóæíîñòü";
 			this->button4->UseVisualStyleBackColor = true;
@@ -251,7 +249,7 @@ namespace Graph_obj {
 			this->button5->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button5->Location = System::Drawing::Point(473, 156);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(75, 23);
+			this->button5->Size = System::Drawing::Size(98, 23);
 			this->button5->TabIndex = 6;
 			this->button5->Text = L"Ïðÿìîóãîëüíèê";
 			this->button5->UseVisualStyleBackColor = true;
@@ -261,7 +259,7 @@ namespace Graph_obj {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(551, 313);
+			this->ClientSize = System::Drawing::Size(583, 313);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
@@ -307,6 +305,16 @@ private: System::Void pictureBox1_MouseDown(System::Object^  sender, System::Win
 		else if (IsCircle)
 		{
 			p = new TCircle(x1, y1, (int)(Math::Sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2))));
+			p->Draw(gr);
+		}
+		else if (IsPoint)
+		{
+			p = new TPoint(x2, y2);
+			p->Draw(gr);
+		}
+		else if (IsRectangle)
+		{
+			p = new TRectangle(x1, y1, x2, y2);
 			p->Draw(gr);
 		}
 }
@@ -372,15 +380,23 @@ private: System::Void pictureBox1_MouseMove(System::Object^  sender, System::Win
 		{
 			p = new TLine(x1, y1, x2, y2);
 			p->Draw(gr);
-			//e->Graphics->DrawLine(Pens::Black, x1, y1, x2, y2);
 		}
 		else if (IsCircle)
 		{
 			p = new TCircle(x1, y1, (int)(Math::Sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2))));
 			p->Draw(gr);
 		}
+		else if (IsPoint)
+		{
+			p = new TPoint(x2, y2);
+			p->Draw(gr);
+		}
+		else if (IsRectangle)
+		{
+			p = new TRectangle(x1, y1, x2, y2);
+			p->Draw(gr);
+		}
 	}
-	//pictureBox1->Refresh();
 }
 private: System::Void òî÷êàToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	IsPoint = true;
@@ -402,71 +418,20 @@ private: System::Void ïðÿìîóãîëüíèêToolStripMenuItem_Click(System::Object^  send
 	IsRectangle = true;
 }
 
-private: System::Void pictureBox1_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e) {
-	Graphics^ gr = this->pictureBox1->CreateGraphics();
-	p->Hide(gr);
-	x2 = e->X;
-	y2 = e->Y;
 
-	if (IsLine)
-	{
-		p = new TLine(x1, y1, x2, y2);
-		p->Draw(gr);
-		//e->Graphics->DrawLine(Pens::Black, x1, y1, x2, y2);
-	}
-	else if (IsCircle)
-	{
-		p = new TCircle(x1, y1, (int)(Math::Sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2))));
-		p->Draw(gr);
-	}
-}
-
-private: System::Void pictureBox1_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e) {
-	Graphics^ gr = this->pictureBox1->CreateGraphics();
-	p->Hide(gr);
-	x2 = e->X;
-	y2 = e->Y;
-
-	if (IsLine)
-	{
-		p = new TLine(x1, y1, x2, y2);
-		p->Draw(gr);
-		//e->Graphics->DrawLine(Pens::Black, x1, y1, x2, y2);
-	}
-	else if (IsCircle)
-	{
-		p = new TCircle(x1, y1, (int)(Math::Sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2))));
-		p->Draw(gr);
-	}
-}
-private: System::Void pictureBox1_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e) {
-	Graphics^ gr = this->pictureBox1->CreateGraphics();
-	p->Hide(gr);
-	x2 = e->X;
-	y2 = e->Y;
-
-	if (IsLine)
-	{
-		p = new TLine(x1, y1, x2, y2);
-		p->Draw(gr);
-		//e->Graphics->DrawLine(Pens::Black, x1, y1, x2, y2);
-	}
-	else if (IsCircle)
-	{
-		p = new TCircle(x1, y1, (int)(Math::Sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2))));
-		p->Draw(gr);
-	}
-}
 private: System::Void íàðèñîâàòüToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	g = new TGroup();
 	IsGroup = true;
 }
 private: System::Void äâèæåíèåToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	Graphics^ gr = this->pictureBox1->CreateGraphics();
-	IsGroup = false;
-	while ((g->GetX(gr))<(this->pictureBox1->Width)*2)
+	if (IsGroup)
 	{
-		g->Move(gr, 1, 0);
+		Graphics^ gr = this->pictureBox1->CreateGraphics();
+		IsGroup = false;
+		while ((g->GetX(gr)) < (this->pictureBox1->Width) * 2)
+		{
+			g->Move(gr, 1, 0);
+		}
 	}
 }
 };

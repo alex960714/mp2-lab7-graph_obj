@@ -342,6 +342,15 @@ namespace Graph_obj
 		};
 		T_Stack <TChartLine> st;
 	public:
+		TChart(int x1, int y1, int x2, int y2)
+		{
+			TObject *p1 = new TPoint(x1, y1);
+			TObject *p2 = new TPoint(x2, y2);
+			SetFirst(p1);
+			SetLast(p2);
+		}
+		~TChart() {}
+
 		TObject* GetFirst() { return begin; }
 		TObject* GetLast() { return end; }
 		void SetFirst(TObject *p) { begin = p; }
@@ -405,6 +414,31 @@ namespace Graph_obj
 				}
 			}
 		}
+
+		TObject* DrawRec(Graphics^ gr, TObject *t)
+		{
+			TPoint *pFp, *pLp;
+			TChart *currLine;
+			if (dynamic_cast<TPoint*>(t))
+				return t;
+			currLine = dynamic_cast<TChart*>(t);
+			pFp = dynamic_cast<TPoint*>(DrawRec(gr, currLine->GetFirst()));
+			pLp = dynamic_cast<TPoint*>(DrawRec(gr, currLine->GetLast()));
+			if ((pFp != NULL) && (pLp != NULL))
+				gr->DrawLine(Pens::Black, pFp->GetX(gr), pFp->GetY(gr), pLp->GetX(gr), pLp->GetY(gr));
+			return pLp;
+		}
+
+		virtual void Hide(Graphics^ gr)
+		{}
+
+		virtual void MoveTo(Graphics^ gr, int x1, int y1) {}
+
+		virtual void Move(Graphics^ gr, int dx, int dy) {}
+
+		virtual int GetX(Graphics^ gr) { return 0; }
+
+		virtual int GetY(Graphics^ gr) { return 0; }
 	};
 
 }
