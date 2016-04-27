@@ -43,15 +43,19 @@ namespace Graph_obj {
 	private: System::Windows::Forms::ToolStripMenuItem^  ëèíèÿToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  îêðóæíîñòüToolStripMenuItem;
 	protected:
+		int x1, y1, x2, y2;
 		TObject *p;
+		TGroup *g;
+		TChart *ch;
+		TChart *line;
 		bool IsPoint;
 		bool IsLine;
 		bool IsCircle;
 		bool IsRectangle;
-		int x1, y1, x2, y2;
 		bool IsPush = false;
-		TGroup *g;
 		bool IsGroup;
+		bool IsPlex;
+		bool IsEmp;
 
 	private: System::Windows::Forms::ToolStripMenuItem^  òî÷êàToolStripMenuItem;
 	private: System::Windows::Forms::Button^  button1;
@@ -63,6 +67,7 @@ namespace Graph_obj {
 	private: System::Windows::Forms::ToolStripMenuItem^  ãðóïïàÎáúåêòîâToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  íàðèñîâàòüToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  äâèæåíèåToolStripMenuItem;
+	private: System::Windows::Forms::Button^  button6;
 
 	protected:
 	private:
@@ -95,6 +100,7 @@ namespace Graph_obj {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -255,11 +261,22 @@ namespace Graph_obj {
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &MyForm::ïðÿìîóãîëüíèêToolStripMenuItem_Click);
 			// 
+			// button6
+			// 
+			this->button6->Location = System::Drawing::Point(473, 186);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(98, 23);
+			this->button6->TabIndex = 7;
+			this->button6->Text = L"×åðò¸æ";
+			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(583, 313);
+			this->Controls->Add(this->button6);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
@@ -325,8 +342,24 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 	Graphics^ gr = this->pictureBox1->CreateGraphics();
 	if (IsLine)
 	{
-		p = new TLine(x1, y1, x2, y2);
-		p->Draw(gr);
+		if (IsPlex)
+		{
+			if (IsEmp)
+			{
+				ch = new TChart(x1, y1, x2, y2);
+			}
+			else
+			{
+				line = new TChart(ch->Search(gr, x1, y1), ch->Search(gr,x2,y2));
+				ch->SetLast(line);
+			}
+			ch->Draw(gr);
+		}
+		else
+		{
+			p = new TLine(x1, y1, x2, y2);
+			p->Draw(gr);
+		}
 		//e->Graphics->DrawLine(Pens::Black, x1, y1, x2, y2);
 	}
 	else if (IsCircle)
@@ -367,6 +400,7 @@ private: System::Void îêðóæíîñòüToolStripMenuItem_Click(System::Object^  sender,
 	IsLine = false;
 	IsCircle = true;
 	IsRectangle = false;
+	IsPlex = false;
 }
 private: System::Void pictureBox1_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 	if (IsPush)
@@ -403,6 +437,7 @@ private: System::Void òî÷êàToolStripMenuItem_Click(System::Object^  sender, Syst
 	IsCircle = false;
 	IsLine = false;
 	IsRectangle = false;
+	IsPlex = false;
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	IsPoint = false;
@@ -410,18 +445,21 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	IsLine = false;
 	IsRectangle = false;
 	IsGroup = false;
+	IsPlex = false;
 }
 private: System::Void ïðÿìîóãîëüíèêToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	IsPoint = false;
 	IsCircle = false;
 	IsLine = false;
 	IsRectangle = true;
+	IsPlex = false;
 }
 
 
 private: System::Void íàðèñîâàòüToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	g = new TGroup();
 	IsGroup = true;
+	IsPlex = false;
 }
 private: System::Void äâèæåíèåToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	if (IsGroup)
@@ -433,6 +471,15 @@ private: System::Void äâèæåíèåToolStripMenuItem_Click(System::Object^  sender, S
 			g->Move(gr, 1, 0);
 		}
 	}
+}
+private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
+	IsPoint = false;
+	IsCircle = false;
+	IsLine = true;
+	IsRectangle = false;
+	IsGroup = false;
+	IsPlex = true;
+	IsEmp = true;
 }
 };
 };

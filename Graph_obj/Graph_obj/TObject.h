@@ -342,10 +342,18 @@ namespace Graph_obj
 		};
 		T_Stack <TChartLine> st;
 	public:
-		TChart(int x1, int y1, int x2, int y2)
+		TChart(int x1, int y1, int x2, int y2) : st(100)
 		{
 			TObject *p1 = new TPoint(x1, y1);
 			TObject *p2 = new TPoint(x2, y2);
+			SetFirst(p1);
+			SetLast(p2);
+		}
+
+		TChart(TObject *p, TObject *p3)
+		{
+			TObject *p1 = (TPoint*)p;
+			TObject *p2 = (TPoint*)p3;
 			SetFirst(p1);
 			SetLast(p2);
 		}
@@ -427,6 +435,78 @@ namespace Graph_obj
 			if ((pFp != NULL) && (pLp != NULL))
 				gr->DrawLine(Pens::Black, pFp->GetX(gr), pFp->GetY(gr), pLp->GetX(gr), pLp->GetY(gr));
 			return pLp;
+		}
+
+		TObject* Search(Graphics^ gr, int x2, int y2)
+		{
+			int dist, distMin=20;
+			TChartLine CurrLine;
+			TPoint *q;
+			TObject *t;
+			st.Clear();
+			CurrLine.pLine = this;
+			CurrLine.pFp = CurrLine.pLp = NULL;
+			st.Push(CurrLine);
+			while (!st.IsEmpty())
+			{
+				CurrLine = st.Pop();
+				while (CurrLine.pFp == NULL)
+				{
+					t = this->GetFirst();
+					q = dynamic_cast <TPoint*>(t);
+					if (q != NULL)
+					{
+						CurrLine.pFp = q;
+						dist = Math::Sqrt(Math::Pow(q->GetX(gr)-x2, 2) + Math::Pow(q->GetY(gr)-y2, 2));
+						if (distMin > dist)
+						{
+							return q;
+						}
+					}
+					else
+					{
+						st.Push(CurrLine);
+						CurrLine.pLine = dynamic_cast <TChart*>(t);
+					}
+				}
+				if (CurrLine.pLp == NULL)
+				{
+					t = this->GetLast();
+					q = dynamic_cast <TPoint*>(t);
+					if (q != NULL)
+					{
+						CurrLine.pLp = q;
+						dist = Math::Sqrt(Math::Pow(q->GetX(gr) - x2, 2) + Math::Pow(q->GetY(gr) - y2, 2));
+						if (distMin > dist)
+						{
+							return q;
+						}
+					}
+					else
+					{
+						st.Push(CurrLine);
+						CurrLine.pLine = dynamic_cast <TChart*>(t);
+						CurrLine.pFp = NULL;
+						st.Push(CurrLine);
+					}
+				}
+				/*if ((CurrLine.pFp != NULL) && (CurrLine.pLp != NULL))
+				{
+					gr->DrawLine(Pens::Black, CurrLine.pFp->GetX(gr), CurrLine.pFp->GetY(gr), CurrLine.pLp->GetX(gr), CurrLine.pLp->GetY(gr));
+					if (!st.IsEmpty())
+					{
+						q = CurrLine.pLp;
+						CurrLine = st.Pop();
+						if (CurrLine.pFp == NULL)
+							CurrLine.pFp = q;
+						else
+							CurrLine.pLp = q;
+						st.Push(CurrLine);
+					}
+				}*/
+				TObject* p = new TPoint(x2, y2);
+				return p;
+			}
 		}
 
 		virtual void Hide(Graphics^ gr)
