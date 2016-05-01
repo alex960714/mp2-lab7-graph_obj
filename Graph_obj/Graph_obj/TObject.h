@@ -339,6 +339,7 @@ namespace Graph_obj
 		{
 			TChart *pLine;
 			TPoint *pFp, *pLp;
+			bool IsVisited;
 		};
 		T_Stack <TChartLine> st;
 	public:
@@ -350,7 +351,7 @@ namespace Graph_obj
 			SetLast(p2);
 		}
 
-		TChart(TObject *p, TObject *p3)
+		TChart(TObject *p, TObject *p3) : st(100)
 		{
 			TObject *p1 = (TPoint*)p;
 			TObject *p2 = (TPoint*)p3;
@@ -372,11 +373,12 @@ namespace Graph_obj
 			st.Clear();
 			CurrLine.pLine = this;
 			CurrLine.pFp = CurrLine.pLp = NULL;
+			CurrLine.IsVisited = false;
 			st.Push(CurrLine);
 			while (!st.IsEmpty())
 			{
 				CurrLine = st.Pop();
-				while (CurrLine.pFp == NULL)
+				while (CurrLine.pFp == NULL && !CurrLine.IsVisited)
 				{
 					t = this->GetFirst();
 					q = dynamic_cast <TPoint*>(t);
@@ -386,8 +388,10 @@ namespace Graph_obj
 					}
 					else
 					{
+						CurrLine.IsVisited = true;
 						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
+						CurrLine.IsVisited = false;
 					}
 				}
 				if (CurrLine.pLp == NULL)
@@ -439,20 +443,21 @@ namespace Graph_obj
 
 		TObject* Search(Graphics^ gr, int x2, int y2)
 		{
-			int dist, distMin=20;
+			double dist, distMin=20;
 			TChartLine CurrLine;
-			TPoint *q;
+			TPoint *q, *curr = NULL;
 			TObject *t;
 			st.Clear();
 			CurrLine.pLine = this;
 			CurrLine.pFp = CurrLine.pLp = NULL;
+			CurrLine.IsVisited = false;
 			st.Push(CurrLine);
 			while (!st.IsEmpty())
 			{
 				CurrLine = st.Pop();
-				while (CurrLine.pFp == NULL)
+				while (CurrLine.pFp == NULL && !CurrLine.IsVisited)
 				{
-					t = this->GetFirst();
+					t = CurrLine.pLine->GetFirst();
 					q = dynamic_cast <TPoint*>(t);
 					if (q != NULL)
 					{
@@ -460,18 +465,21 @@ namespace Graph_obj
 						dist = Math::Sqrt(Math::Pow(q->GetX(gr)-x2, 2) + Math::Pow(q->GetY(gr)-y2, 2));
 						if (distMin > dist)
 						{
-							return q;
+							distMin = dist;
+							curr = q;
 						}
 					}
 					else
 					{
+						CurrLine.IsVisited = true;
 						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
+						CurrLine.IsVisited = false;
 					}
 				}
 				if (CurrLine.pLp == NULL)
 				{
-					t = this->GetLast();
+					t = CurrLine.pLine->GetLast();
 					q = dynamic_cast <TPoint*>(t);
 					if (q != NULL)
 					{
@@ -479,14 +487,17 @@ namespace Graph_obj
 						dist = Math::Sqrt(Math::Pow(q->GetX(gr) - x2, 2) + Math::Pow(q->GetY(gr) - y2, 2));
 						if (distMin > dist)
 						{
-							return q;
+							distMin = dist;
+							curr = q;
 						}
 					}
 					else
 					{
+						CurrLine.IsVisited = true;
 						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.pFp = NULL;
+						CurrLine.IsVisited = false;
 						st.Push(CurrLine);
 					}
 				}
@@ -504,9 +515,12 @@ namespace Graph_obj
 						st.Push(CurrLine);
 					}
 				}*/
-				TObject* p = new TPoint(x2, y2);
-				return p;
+				
 			}
+			if (curr != NULL)
+				return curr;
+			TObject* p = new TPoint(x2, y2);
+			return p;
 		}
 
 		virtual void Hide(Graphics^ gr)

@@ -334,6 +334,8 @@ private: System::Void pictureBox1_MouseDown(System::Object^  sender, System::Win
 			p = new TRectangle(x1, y1, x2, y2);
 			p->Draw(gr);
 		}
+		else
+			IsPush = false;
 }
 
 private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
@@ -344,16 +346,23 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 	{
 		if (IsPlex)
 		{
+			p->Hide(gr);
 			if (IsEmp)
 			{
 				ch = new TChart(x1, y1, x2, y2);
+				IsEmp = false;
 			}
 			else
 			{
-				line = new TChart(ch->Search(gr, x1, y1), ch->Search(gr,x2,y2));
-				ch->SetLast(line);
+				TPoint *p1 = (TPoint*)ch->Search(gr, x1, y1);
+				TPoint *p2 = (TPoint*)ch->Search(gr, x2, y2);
+				line = new TChart(p1, p2);
+				if (p1->GetX(gr) == line->GetFirst()->GetX(gr) && p1->GetY(gr) == line->GetFirst()->GetY(gr))
+					ch->SetFirst(line);
+				if (p2->GetX(gr) == line->GetLast()->GetX(gr) && p2->GetY(gr) == line->GetLast()->GetY(gr))
+					ch->SetLast(line);
 			}
-			ch->Draw(gr);
+			ch->DrawRec(gr,ch);
 		}
 		else
 		{
