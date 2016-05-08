@@ -98,15 +98,15 @@ namespace Graph_obj {
 			this->ãðóïïàÎáúåêòîâToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->íàðèñîâàòüToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->äâèæåíèåToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->÷åðò¸æToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->íàðèñîâàòüToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->òåñòToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->÷åðò¸æToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->íàðèñîâàòüToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->òåñòToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -212,6 +212,30 @@ namespace Graph_obj {
 			this->äâèæåíèåToolStripMenuItem->Text = L"Äâèæåíèå";
 			this->äâèæåíèåToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::äâèæåíèåToolStripMenuItem_Click);
 			// 
+			// ÷åðò¸æToolStripMenuItem
+			// 
+			this->÷åðò¸æToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->íàðèñîâàòüToolStripMenuItem1,
+					this->òåñòToolStripMenuItem
+			});
+			this->÷åðò¸æToolStripMenuItem->Name = L"÷åðò¸æToolStripMenuItem";
+			this->÷åðò¸æToolStripMenuItem->Size = System::Drawing::Size(60, 20);
+			this->÷åðò¸æToolStripMenuItem->Text = L"×åðò¸æ";
+			// 
+			// íàðèñîâàòüToolStripMenuItem1
+			// 
+			this->íàðèñîâàòüToolStripMenuItem1->Name = L"íàðèñîâàòüToolStripMenuItem1";
+			this->íàðèñîâàòüToolStripMenuItem1->Size = System::Drawing::Size(152, 22);
+			this->íàðèñîâàòüToolStripMenuItem1->Text = L"Íàðèñîâàòü";
+			this->íàðèñîâàòüToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
+			// 
+			// òåñòToolStripMenuItem
+			// 
+			this->òåñòToolStripMenuItem->Name = L"òåñòToolStripMenuItem";
+			this->òåñòToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->òåñòToolStripMenuItem->Text = L"Òåñò";
+			this->òåñòToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::òåñòToolStripMenuItem_Click);
+			// 
 			// button1
 			// 
 			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
@@ -276,29 +300,6 @@ namespace Graph_obj {
 			this->button6->Text = L"×åðò¸æ";
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
-			// 
-			// ÷åðò¸æToolStripMenuItem
-			// 
-			this->÷åðò¸æToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->íàðèñîâàòüToolStripMenuItem1,
-					this->òåñòToolStripMenuItem
-			});
-			this->÷åðò¸æToolStripMenuItem->Name = L"÷åðò¸æToolStripMenuItem";
-			this->÷åðò¸æToolStripMenuItem->Size = System::Drawing::Size(60, 20);
-			this->÷åðò¸æToolStripMenuItem->Text = L"×åðò¸æ";
-			// 
-			// íàðèñîâàòüToolStripMenuItem1
-			// 
-			this->íàðèñîâàòüToolStripMenuItem1->Name = L"íàðèñîâàòüToolStripMenuItem1";
-			this->íàðèñîâàòüToolStripMenuItem1->Size = System::Drawing::Size(152, 22);
-			this->íàðèñîâàòüToolStripMenuItem1->Text = L"Íàðèñîâàòü";
-			// 
-			// òåñòToolStripMenuItem
-			// 
-			this->òåñòToolStripMenuItem->Name = L"òåñòToolStripMenuItem";
-			this->òåñòToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->òåñòToolStripMenuItem->Text = L"Òåñò";
-			this->òåñòToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::òåñòToolStripMenuItem_Click);
 			// 
 			// MyForm
 			// 
@@ -396,8 +397,6 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 					else if (dist2 < dist1 && dist2 < distMin)
 						p1 = pp1->GetLast();
 				}
-				else
-					p1 = new TPoint(x1, y1);
 
 				TChart *pp2 = dynamic_cast <TChart*>(p2);
 				if (pp2 != NULL)
@@ -409,8 +408,6 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 					else if (dist4 < dist3 && dist4 < distMin)
 						p2 = pp2->GetLast();
 				}
-				else
-					p2 = new TPoint(x2, y2);
 
 				if (pp1 != NULL)
 				{
