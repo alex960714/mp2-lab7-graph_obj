@@ -68,6 +68,9 @@ namespace Graph_obj {
 	private: System::Windows::Forms::ToolStripMenuItem^  íàðèñîâàòüToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  äâèæåíèåToolStripMenuItem;
 	private: System::Windows::Forms::Button^  button6;
+	private: System::Windows::Forms::ToolStripMenuItem^  ÷åðò¸æToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  íàðèñîâàòüToolStripMenuItem1;
+	private: System::Windows::Forms::ToolStripMenuItem^  òåñòToolStripMenuItem;
 
 	protected:
 	private:
@@ -101,6 +104,9 @@ namespace Graph_obj {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->÷åðò¸æToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->íàðèñîâàòüToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->òåñòToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -121,9 +127,9 @@ namespace Graph_obj {
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 				this->ôàéëToolStripMenuItem,
-					this->îòðèñîâêàToolStripMenuItem, this->ãðóïïàÎáúåêòîâToolStripMenuItem
+					this->îòðèñîâêàToolStripMenuItem, this->ãðóïïàÎáúåêòîâToolStripMenuItem, this->÷åðò¸æToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
@@ -271,6 +277,29 @@ namespace Graph_obj {
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
 			// 
+			// ÷åðò¸æToolStripMenuItem
+			// 
+			this->÷åðò¸æToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->íàðèñîâàòüToolStripMenuItem1,
+					this->òåñòToolStripMenuItem
+			});
+			this->÷åðò¸æToolStripMenuItem->Name = L"÷åðò¸æToolStripMenuItem";
+			this->÷åðò¸æToolStripMenuItem->Size = System::Drawing::Size(60, 20);
+			this->÷åðò¸æToolStripMenuItem->Text = L"×åðò¸æ";
+			// 
+			// íàðèñîâàòüToolStripMenuItem1
+			// 
+			this->íàðèñîâàòüToolStripMenuItem1->Name = L"íàðèñîâàòüToolStripMenuItem1";
+			this->íàðèñîâàòüToolStripMenuItem1->Size = System::Drawing::Size(152, 22);
+			this->íàðèñîâàòüToolStripMenuItem1->Text = L"Íàðèñîâàòü";
+			// 
+			// òåñòToolStripMenuItem
+			// 
+			this->òåñòToolStripMenuItem->Name = L"òåñòToolStripMenuItem";
+			this->òåñòToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->òåñòToolStripMenuItem->Text = L"Òåñò";
+			this->òåñòToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::òåñòToolStripMenuItem_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -358,6 +387,10 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 				TPoint *p2 = (TPoint*)ch->Search(gr, x2, y2);
 				line = new TChart(p1, p2);
 				if (p1->GetX(gr) == line->GetFirst()->GetX(gr) && p1->GetY(gr) == line->GetFirst()->GetY(gr))
+					ch->SetFirst(line);
+				if (p1->GetX(gr) == line->GetLast()->GetX(gr) && p1->GetY(gr) == line->GetLast()->GetY(gr))
+					ch->SetLast(line);
+				if (p2->GetX(gr) == line->GetFirst()->GetX(gr) && p2->GetY(gr) == line->GetFirst()->GetY(gr))
 					ch->SetFirst(line);
 				if (p2->GetX(gr) == line->GetLast()->GetX(gr) && p2->GetY(gr) == line->GetLast()->GetY(gr))
 					ch->SetLast(line);
@@ -489,6 +522,17 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 	IsGroup = false;
 	IsPlex = true;
 	IsEmp = true;
+}
+private: System::Void òåñòToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	Graphics^ gr = this->pictureBox1->CreateGraphics();
+	ch = new TChart(100, 100, 200, 200);
+	line = new TChart(250, 150, 100, 100);
+	ch->SetFirst(line);
+	line = new TChart(200, 100, 200, 200);
+	ch->SetLast(line);
+	
+
+	ch->DrawRec(gr, ch);
 }
 };
 };
