@@ -379,7 +379,7 @@ namespace Graph_obj
 			while (!st.IsEmpty())
 			{
 				CurrLine = st.Pop();
-				while (CurrLine.pFp == NULL && !CurrLine.IsVisited)
+				while (CurrLine.pFp == NULL )
 				{
 					t = this->GetFirst();
 					q = dynamic_cast <TPoint*>(t);
@@ -389,10 +389,10 @@ namespace Graph_obj
 					}
 					else
 					{
-						CurrLine.IsVisited = true;
+						//CurrLine.IsVisited = true;
 						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
-						CurrLine.IsVisited = false;
+						//CurrLine.IsVisited = false;
 					}
 				}
 				if (CurrLine.pLp == NULL)
@@ -446,7 +446,8 @@ namespace Graph_obj
 		{
 			double dist, distMin=20;
 			TChartLine CurrLine;
-			TPoint *q, *curr = NULL;
+			TPoint *q;
+			TObject *curr = NULL;
 			TObject *t;
 			st.Clear();
 			CurrLine.pLine = this;
@@ -468,7 +469,7 @@ namespace Graph_obj
 						if (distMin > dist)
 						{
 							distMin = dist;
-							curr = q;
+							curr = CurrLine.pLine;
 						}
 					}
 					else
@@ -491,7 +492,7 @@ namespace Graph_obj
 						if (distMin > dist)
 						{
 							distMin = dist;
-							curr = q;
+							curr = CurrLine.pLine;
 						}
 					}
 					else

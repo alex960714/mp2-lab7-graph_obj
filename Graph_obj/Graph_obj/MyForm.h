@@ -383,17 +383,56 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 			}
 			else
 			{
-				TPoint *p1 = (TPoint*)ch->Search(gr, x1, y1);
-				TPoint *p2 = (TPoint*)ch->Search(gr, x2, y2);
-				line = new TChart(p1, p2);
-				if (p1->GetX(gr) == line->GetFirst()->GetX(gr) && p1->GetY(gr) == line->GetFirst()->GetY(gr))
-					ch->SetFirst(line);
-				if (p1->GetX(gr) == line->GetLast()->GetX(gr) && p1->GetY(gr) == line->GetLast()->GetY(gr))
-					ch->SetLast(line);
-				if (p2->GetX(gr) == line->GetFirst()->GetX(gr) && p2->GetY(gr) == line->GetFirst()->GetY(gr))
-					ch->SetFirst(line);
-				if (p2->GetX(gr) == line->GetLast()->GetX(gr) && p2->GetY(gr) == line->GetLast()->GetY(gr))
-					ch->SetLast(line);
+				int dist1, dist2, dist3, dist4, distMin = 20;
+				TObject *p1 = ch->Search(gr, x1, y1);
+				TObject *p2 = ch->Search(gr, x2, y2);
+				TChart *pp1 = dynamic_cast <TChart*>(p1);
+				if (pp1 != NULL)
+				{
+					dist1 = Math::Sqrt(Math::Pow(pp1->GetFirst()->GetX(gr) - x2, 2) + Math::Pow(pp1->GetFirst()->GetY(gr) - y2, 2));
+					dist2 = Math::Sqrt(Math::Pow(pp1->GetLast()->GetX(gr) - x2, 2) + Math::Pow(pp1->GetLast()->GetY(gr) - y2, 2));
+					if (dist1 <= dist2 && dist1 < distMin)
+						p1 = pp1->GetFirst();
+					else if (dist2 < dist1 && dist2 < distMin)
+						p1 = pp1->GetLast();
+				}
+				else
+					p1 = new TPoint(x1, y1);
+
+				TChart *pp2 = dynamic_cast <TChart*>(p2);
+				if (pp2 != NULL)
+				{
+					dist3 = Math::Sqrt(Math::Pow(pp2->GetFirst()->GetX(gr) - x2, 2) + Math::Pow(pp2->GetFirst()->GetY(gr) - y2, 2));
+					dist4 = Math::Sqrt(Math::Pow(pp2->GetLast()->GetX(gr) - x2, 2) + Math::Pow(pp2->GetLast()->GetY(gr) - y2, 2));
+					if (dist3 <= dist4 && dist3 < distMin)
+						p2 = pp2->GetFirst();
+					else if (dist4 < dist3 && dist4 < distMin)
+						p2 = pp2->GetLast();
+				}
+				else
+					p2 = new TPoint(x2, y2);
+
+				if (pp1 != NULL)
+				{
+					line = new TChart(p2, p1);
+					if (dist1 <= dist2 && dist1 < distMin)
+						pp1->SetFirst(line);
+					else if (dist2 < dist1 && dist2 < distMin)
+						pp1->SetLast(line);
+				}
+				else if (pp2 != NULL)
+				{
+					line = new TChart(p1, p2);
+					if (dist3 <= dist4 && dist3 < distMin)
+						pp2->SetFirst(line);
+					else if (dist4 < dist3 && dist4 < distMin)
+						pp2->SetLast(line);
+				}
+				else
+				{
+					line = new TChart(p1, p2);
+					line->DrawRec(gr, line);
+				}
 			}
 			ch->DrawRec(gr,ch);
 		}
@@ -525,12 +564,9 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 }
 private: System::Void òåñòToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	Graphics^ gr = this->pictureBox1->CreateGraphics();
-	ch = new TChart(100, 100, 200, 200);
-	line = new TChart(250, 150, 100, 100);
+	ch = new TChart(50,50,100,50);
+	line = new TChart(100,100,50,50);
 	ch->SetFirst(line);
-	line = new TChart(200, 100, 200, 200);
-	ch->SetLast(line);
-	
 
 	ch->DrawRec(gr, ch);
 }
