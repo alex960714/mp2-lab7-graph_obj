@@ -384,48 +384,49 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 			}
 			else
 			{
-				int dist1, dist2, dist3, dist4, distMin = 20;
+				int dist1 = 21, dist2 =21, dist3 = 21, dist4 = 21, distMin = 20;
 				TObject *p1 = ch->Search(gr, x1, y1);
 				TObject *p2 = ch->Search(gr, x2, y2);
 				TChart *pp1 = dynamic_cast <TChart*>(p1);
 				if (pp1 != NULL)
 				{
-					dist1 = Math::Sqrt(Math::Pow(pp1->GetFirst()->GetX(gr) - x2, 2) + Math::Pow(pp1->GetFirst()->GetY(gr) - y2, 2));
-					dist2 = Math::Sqrt(Math::Pow(pp1->GetLast()->GetX(gr) - x2, 2) + Math::Pow(pp1->GetLast()->GetY(gr) - y2, 2));
+					dist1 = Math::Sqrt(Math::Pow(pp1->GetFirst()->GetX(gr) - x1, 2) + Math::Pow(pp1->GetFirst()->GetY(gr) - y1, 2));
+					dist2 = Math::Sqrt(Math::Pow(pp1->GetLast()->GetX(gr) - x1, 2) + Math::Pow(pp1->GetLast()->GetY(gr) - y1, 2));
 					if (dist1 <= dist2 && dist1 < distMin)
 						p1 = pp1->GetFirst();
-					else if (dist2 < dist1 && dist2 < distMin)
+					else if (dist2<dist1 && dist2 < distMin)
 						p1 = pp1->GetLast();
 				}
 
 				TChart *pp2 = dynamic_cast <TChart*>(p2);
 				if (pp2 != NULL)
 				{
+					
 					dist3 = Math::Sqrt(Math::Pow(pp2->GetFirst()->GetX(gr) - x2, 2) + Math::Pow(pp2->GetFirst()->GetY(gr) - y2, 2));
 					dist4 = Math::Sqrt(Math::Pow(pp2->GetLast()->GetX(gr) - x2, 2) + Math::Pow(pp2->GetLast()->GetY(gr) - y2, 2));
 					if (dist3 <= dist4 && dist3 < distMin)
 						p2 = pp2->GetFirst();
-					else if (dist4 < dist3 && dist4 < distMin)
+					else if (dist4<dist3 && dist4 < distMin)
 						p2 = pp2->GetLast();
 				}
 
 				if (pp1 != NULL)
 				{
 					line = new TChart(p2, p1);
-					if (dist1 <= dist2 && dist1 < distMin)
+					if (dist1 <= dist2)
 						pp1->SetFirst(line);
-					else if (dist2 < dist1 && dist2 < distMin)
+					else
 						pp1->SetLast(line);
 				}
-				else if (pp2 != NULL)
+				if (pp2 != NULL)
 				{
 					line = new TChart(p1, p2);
-					if (dist3 <= dist4 && dist3 < distMin)
+					if (dist3 <= dist4)
 						pp2->SetFirst(line);
-					else if (dist4 < dist3 && dist4 < distMin)
+					else 
 						pp2->SetLast(line);
 				}
-				else
+				if (pp1 == NULL && pp2 == NULL)
 				{
 					line = new TChart(p1, p2);
 					line->DrawRec(gr, line);
