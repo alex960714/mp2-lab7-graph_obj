@@ -71,6 +71,10 @@ namespace Graph_obj {
 	private: System::Windows::Forms::ToolStripMenuItem^  чертёжToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  нарисоватьToolStripMenuItem1;
 	private: System::Windows::Forms::ToolStripMenuItem^  тестToolStripMenuItem;
+	private: System::Windows::Forms::Button^  button7;
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Button^  button8;
 
 	protected:
 	private:
@@ -107,6 +111,10 @@ namespace Graph_obj {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->button8 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -117,7 +125,7 @@ namespace Graph_obj {
 			this->pictureBox1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 			this->pictureBox1->Location = System::Drawing::Point(2, 26);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(465, 287);
+			this->pictureBox1->Size = System::Drawing::Size(482, 296);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
 			this->pictureBox1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::pictureBox1_Paint);
@@ -133,7 +141,7 @@ namespace Graph_obj {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(583, 24);
+			this->menuStrip1->Size = System::Drawing::Size(655, 24);
 			this->menuStrip1->TabIndex = 1;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -225,23 +233,23 @@ namespace Graph_obj {
 			// нарисоватьToolStripMenuItem1
 			// 
 			this->нарисоватьToolStripMenuItem1->Name = L"нарисоватьToolStripMenuItem1";
-			this->нарисоватьToolStripMenuItem1->Size = System::Drawing::Size(152, 22);
+			this->нарисоватьToolStripMenuItem1->Size = System::Drawing::Size(139, 22);
 			this->нарисоватьToolStripMenuItem1->Text = L"Нарисовать";
 			this->нарисоватьToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
 			// 
 			// тестToolStripMenuItem
 			// 
 			this->тестToolStripMenuItem->Name = L"тестToolStripMenuItem";
-			this->тестToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->тестToolStripMenuItem->Size = System::Drawing::Size(139, 22);
 			this->тестToolStripMenuItem->Text = L"Тест";
 			this->тестToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::тестToolStripMenuItem_Click);
 			// 
 			// button1
 			// 
 			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->button1->Location = System::Drawing::Point(473, 36);
+			this->button1->Location = System::Drawing::Point(493, 37);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(98, 23);
+			this->button1->Size = System::Drawing::Size(150, 23);
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"Мышь";
 			this->button1->UseVisualStyleBackColor = true;
@@ -250,9 +258,9 @@ namespace Graph_obj {
 			// button2
 			// 
 			this->button2->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->button2->Location = System::Drawing::Point(473, 66);
+			this->button2->Location = System::Drawing::Point(493, 66);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(98, 23);
+			this->button2->Size = System::Drawing::Size(150, 23);
 			this->button2->TabIndex = 3;
 			this->button2->Text = L"Точка";
 			this->button2->UseVisualStyleBackColor = true;
@@ -261,9 +269,9 @@ namespace Graph_obj {
 			// button3
 			// 
 			this->button3->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->button3->Location = System::Drawing::Point(473, 96);
+			this->button3->Location = System::Drawing::Point(493, 95);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(98, 23);
+			this->button3->Size = System::Drawing::Size(150, 23);
 			this->button3->TabIndex = 4;
 			this->button3->Text = L"Линия";
 			this->button3->UseVisualStyleBackColor = true;
@@ -272,9 +280,9 @@ namespace Graph_obj {
 			// button4
 			// 
 			this->button4->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->button4->Location = System::Drawing::Point(473, 126);
+			this->button4->Location = System::Drawing::Point(493, 124);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(98, 23);
+			this->button4->Size = System::Drawing::Size(150, 23);
 			this->button4->TabIndex = 5;
 			this->button4->Text = L"Окружность";
 			this->button4->UseVisualStyleBackColor = true;
@@ -283,9 +291,9 @@ namespace Graph_obj {
 			// button5
 			// 
 			this->button5->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->button5->Location = System::Drawing::Point(473, 156);
+			this->button5->Location = System::Drawing::Point(493, 153);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(98, 23);
+			this->button5->Size = System::Drawing::Size(150, 23);
 			this->button5->TabIndex = 6;
 			this->button5->Text = L"Прямоугольник";
 			this->button5->UseVisualStyleBackColor = true;
@@ -293,19 +301,68 @@ namespace Graph_obj {
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(473, 186);
+			this->button6->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button6->Location = System::Drawing::Point(493, 243);
 			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(98, 23);
+			this->button6->Size = System::Drawing::Size(150, 23);
 			this->button6->TabIndex = 7;
 			this->button6->Text = L"Чертёж";
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
 			// 
+			// button7
+			// 
+			this->button7->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button7->Location = System::Drawing::Point(493, 183);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(150, 23);
+			this->button7->TabIndex = 8;
+			this->button7->Text = L"Группа объектов";
+			this->button7->UseVisualStyleBackColor = true;
+			this->button7->Click += gcnew System::EventHandler(this, &MyForm::нарисоватьToolStripMenuItem_Click);
+			// 
+			// label1
+			// 
+			this->label1->BackColor = System::Drawing::Color::White;
+			this->label1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->label1->Cursor = System::Windows::Forms::Cursors::IBeam;
+			this->label1->Location = System::Drawing::Point(493, 307);
+			this->label1->Name = L"label1";
+			this->label1->RightToLeft = System::Windows::Forms::RightToLeft::No;
+			this->label1->Size = System::Drawing::Size(150, 15);
+			this->label1->TabIndex = 9;
+			this->label1->Text = L"Указатель";
+			this->label1->TextAlign = System::Drawing::ContentAlignment::TopCenter;
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(490, 284);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(64, 13);
+			this->label2->TabIndex = 10;
+			this->label2->Text = L"Состояние:";
+			// 
+			// button8
+			// 
+			this->button8->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->button8->Location = System::Drawing::Point(493, 213);
+			this->button8->Name = L"button8";
+			this->button8->Size = System::Drawing::Size(150, 23);
+			this->button8->TabIndex = 11;
+			this->button8->Text = L"Движение группы";
+			this->button8->UseVisualStyleBackColor = true;
+			this->button8->Click += gcnew System::EventHandler(this, &MyForm::движениеToolStripMenuItem_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(583, 313);
+			this->ClientSize = System::Drawing::Size(655, 331);
+			this->Controls->Add(this->button8);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
@@ -316,7 +373,7 @@ namespace Graph_obj {
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->Text = L"Отрисовка геометрических объектов";
 			this->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::MyForm_MouseDown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
@@ -331,6 +388,12 @@ namespace Graph_obj {
 		IsLine = true;
 		IsCircle = false;
 		IsRectangle = false;
+		IsPlex = false;
+
+		if (IsGroup)
+			label1->Text = "Группа - Линия";
+		else
+			label1->Text = "Линия";
 	}
 private: System::Void MyForm_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 	/*x1 = e->X;
@@ -479,7 +542,12 @@ private: System::Void окружностьToolStripMenuItem_Click(System::Object^  sender,
 	IsLine = false;
 	IsCircle = true;
 	IsRectangle = false;
-	IsPlex = false;
+	IsPlex = false; 
+	
+	if (IsGroup)
+		label1->Text = "Группа - Окружность";
+	else
+		label1->Text = "Окружность";
 }
 private: System::Void pictureBox1_MouseMove(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 	if (IsPush)
@@ -517,6 +585,11 @@ private: System::Void точкаToolStripMenuItem_Click(System::Object^  sender, Syst
 	IsLine = false;
 	IsRectangle = false;
 	IsPlex = false;
+
+	if (IsGroup)
+		label1->Text = "Группа - Точка";
+	else
+		label1->Text = "Точка";
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	IsPoint = false;
@@ -525,6 +598,8 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	IsRectangle = false;
 	IsGroup = false;
 	IsPlex = false;
+
+	label1->Text = "Указатель";
 }
 private: System::Void прямоугольникToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	IsPoint = false;
@@ -532,6 +607,11 @@ private: System::Void прямоугольникToolStripMenuItem_Click(System::Object^  send
 	IsLine = false;
 	IsRectangle = true;
 	IsPlex = false;
+
+	if (IsGroup)
+		label1->Text = "Группа - Прямоугольник";
+	else
+		label1->Text = "Прямоугольник";
 }
 
 
@@ -539,6 +619,12 @@ private: System::Void нарисоватьToolStripMenuItem_Click(System::Object^  sender,
 	g = new TGroup();
 	IsGroup = true;
 	IsPlex = false;
+	IsPoint = false;
+	IsLine = false;
+	IsCircle = false;
+	IsRectangle = false;
+
+	label1->Text = "Группа объектов";
 }
 private: System::Void движениеToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	if (IsGroup)
@@ -559,6 +645,8 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 	IsGroup = false;
 	IsPlex = true;
 	IsEmp = true;
+
+	label1->Text = "Чертёж";
 }
 private: System::Void тестToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	Graphics^ gr = this->pictureBox1->CreateGraphics();
@@ -567,6 +655,31 @@ private: System::Void тестToolStripMenuItem_Click(System::Object^  sender, Syste
 	ch->SetFirst(line);
 
 	ch->DrawRec(gr, ch);
+}
+private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (IsGroup)
+	{
+		if (IsPoint)
+			label1->Text = "Группа - Точка";
+		if (IsLine)
+			label1->Text = "Группа - Линия";
+		if (IsCircle)
+			label1->Text = "Группа - Окружность";
+		if (IsRectangle)
+			label1->Text = "Группа - Прямоугольник";
+	}
+	else if (IsPlex)
+		label1->Text = "Чертёж";
+	else if (IsLine)
+		label1->Text = "Линия";
+	else if (IsPoint)
+		label1->Text = "Точка";
+	else if (IsCircle)
+		label1->Text = "Окружность";
+	else if (IsRectangle)
+		label1->Text = "Прямоугольник";
+	else
+		label1->Text = "Мышь";
 }
 };
 };
