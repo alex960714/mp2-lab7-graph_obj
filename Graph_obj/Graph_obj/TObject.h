@@ -389,10 +389,8 @@ namespace Graph_obj
 					}
 					else
 					{
-						//CurrLine.IsVisited = true;
 						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
-						//CurrLine.IsVisited = false;
 					}
 				}
 				if (CurrLine.pLp == NULL)
@@ -506,21 +504,6 @@ namespace Graph_obj
 						st.Push(CurrLine);
 					}
 				}
-				/*if ((CurrLine.pFp != NULL) && (CurrLine.pLp != NULL))
-				{
-					gr->DrawLine(Pens::Black, CurrLine.pFp->GetX(gr), CurrLine.pFp->GetY(gr), CurrLine.pLp->GetX(gr), CurrLine.pLp->GetY(gr));
-					if (!st.IsEmpty())
-					{
-						q = CurrLine.pLp;
-						CurrLine = st.Pop();
-						if (CurrLine.pFp == NULL)
-							CurrLine.pFp = q;
-						else
-							CurrLine.pLp = q;
-						st.Push(CurrLine);
-					}
-				}*/
-				
 			}
 			if (curr != NULL)
 				return curr;

@@ -128,7 +128,6 @@ namespace Graph_obj {
 			this->pictureBox1->Size = System::Drawing::Size(482, 296);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
-			this->pictureBox1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::pictureBox1_Paint);
 			this->pictureBox1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::pictureBox1_MouseDown);
 			this->pictureBox1->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::pictureBox1_MouseMove);
 			this->pictureBox1->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::pictureBox1_MouseUp);
@@ -251,7 +250,7 @@ namespace Graph_obj {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(150, 23);
 			this->button1->TabIndex = 2;
-			this->button1->Text = L"Мышь";
+			this->button1->Text = L"Указатель";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
@@ -374,7 +373,6 @@ namespace Graph_obj {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"MyForm";
 			this->Text = L"Отрисовка геометрических объектов";
-			this->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::MyForm_MouseDown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -395,10 +393,7 @@ namespace Graph_obj {
 		else
 			label1->Text = "Линия";
 	}
-private: System::Void MyForm_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
-	/*x1 = e->X;
-	y1 = e->Y;*/
-}
+
 private: System::Void pictureBox1_MouseDown(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 	x1 = e->X;
 	y1 = e->Y;
@@ -410,7 +405,6 @@ private: System::Void pictureBox1_MouseDown(System::Object^  sender, System::Win
 		{
 			p = new TLine(x1, y1, x2, y2);
 			p->Draw(gr);
-			//e->Graphics->DrawLine(Pens::Black, x1, y1, x2, y2);
 		}
 		else if (IsCircle)
 		{
@@ -502,7 +496,6 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 			p = new TLine(x1, y1, x2, y2);
 			p->Draw(gr);
 		}
-		//e->Graphics->DrawLine(Pens::Black, x1, y1, x2, y2);
 	}
 	else if (IsCircle)
 	{
@@ -522,21 +515,8 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 	IsPush = false;
 	if (IsGroup)
 		g->Insert(p);
-	//pictureBox1->Refresh();
 }
-private: System::Void pictureBox1_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
-	/*Graphics^ gr = this->pictureBox1->CreateGraphics();
-	if (IsLine)
-	{
-		TLine *p1 = new TLine(x1, y1, x2, y2);
-		p1->Draw(gr);
-		//e->Graphics->DrawLine(Pens::Black, x1, y1, x2, y2);
-	}
-	else if (IsCircle)
-	{
-		p = new TCircle(x1, y1, (int)(Math::Sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2))));
-	}*/
-}
+
 private: System::Void окружностьToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	IsPoint = false;
 	IsLine = false;
