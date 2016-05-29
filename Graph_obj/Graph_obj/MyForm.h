@@ -447,8 +447,10 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 				TChart *pp1 = dynamic_cast <TChart*>(p1);
 				if (pp1 != NULL)
 				{
-					dist1 = Math::Sqrt(Math::Pow(pp1->GetFirst()->GetX(gr) - x1, 2) + Math::Pow(pp1->GetFirst()->GetY(gr) - y1, 2));
-					dist2 = Math::Sqrt(Math::Pow(pp1->GetLast()->GetX(gr) - x1, 2) + Math::Pow(pp1->GetLast()->GetY(gr) - y1, 2));
+					if (dynamic_cast <TPoint*>(pp1->GetFirst()) != NULL)
+						dist1 = Math::Sqrt(Math::Pow(pp1->GetFirst()->GetX(gr) - x1, 2) + Math::Pow(pp1->GetFirst()->GetY(gr) - y1, 2));
+					if (dynamic_cast <TPoint*>(pp1->GetLast()) != NULL)
+						dist2 = Math::Sqrt(Math::Pow(pp1->GetLast()->GetX(gr) - x1, 2) + Math::Pow(pp1->GetLast()->GetY(gr) - y1, 2));
 					if (dist1 <= dist2 && dist1 < distMin)
 						p1 = pp1->GetFirst();
 					else if (dist2<dist1 && dist2 < distMin)
@@ -458,9 +460,10 @@ private: System::Void pictureBox1_MouseUp(System::Object^  sender, System::Windo
 				TChart *pp2 = dynamic_cast <TChart*>(p2);
 				if (pp2 != NULL)
 				{
-					
-					dist3 = Math::Sqrt(Math::Pow(pp2->GetFirst()->GetX(gr) - x2, 2) + Math::Pow(pp2->GetFirst()->GetY(gr) - y2, 2));
-					dist4 = Math::Sqrt(Math::Pow(pp2->GetLast()->GetX(gr) - x2, 2) + Math::Pow(pp2->GetLast()->GetY(gr) - y2, 2));
+					if (dynamic_cast <TPoint*>(pp2->GetFirst()) != NULL)
+						dist3 = Math::Sqrt(Math::Pow(pp2->GetFirst()->GetX(gr) - x2, 2) + Math::Pow(pp2->GetFirst()->GetY(gr) - y2, 2));
+					if (dynamic_cast <TPoint*>(pp2->GetLast()) != NULL)
+						dist4 = Math::Sqrt(Math::Pow(pp2->GetLast()->GetX(gr) - x2, 2) + Math::Pow(pp2->GetLast()->GetY(gr) - y2, 2));
 					if (dist3 <= dist4 && dist3 < distMin)
 						p2 = pp2->GetFirst();
 					else if (dist4<dist3 && dist4 < distMin)
@@ -616,6 +619,15 @@ private: System::Void движениеToolStripMenuItem_Click(System::Object^  sender, S
 			g->Move(gr, 1, 0);
 		}
 	}
+	else if (IsPlex)
+	{
+		Graphics^ gr = this->pictureBox1->CreateGraphics();
+		IsPlex = false;
+		while ((ch->GetX(gr)) < (this->pictureBox1->Width) * 2)
+		{
+			ch->Move(gr, 1, 0);
+		}
+	}
 }
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
 	IsPoint = false;
@@ -636,31 +648,7 @@ private: System::Void тестToolStripMenuItem_Click(System::Object^  sender, Syste
 
 	ch->DrawRec(gr, ch);
 }
-private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
-	if (IsGroup)
-	{
-		if (IsPoint)
-			label1->Text = "Группа - Точка";
-		if (IsLine)
-			label1->Text = "Группа - Линия";
-		if (IsCircle)
-			label1->Text = "Группа - Окружность";
-		if (IsRectangle)
-			label1->Text = "Группа - Прямоугольник";
-	}
-	else if (IsPlex)
-		label1->Text = "Чертёж";
-	else if (IsLine)
-		label1->Text = "Линия";
-	else if (IsPoint)
-		label1->Text = "Точка";
-	else if (IsCircle)
-		label1->Text = "Окружность";
-	else if (IsRectangle)
-		label1->Text = "Прямоугольник";
-	else
-		label1->Text = "Мышь";
-}
+
 };
 };
 
