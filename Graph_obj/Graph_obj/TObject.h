@@ -340,7 +340,6 @@ namespace Graph_obj
 			TChart *pLine;
 			TPoint *pFp, *pLp;
 			bool IsVisited;
-			bool IsReturned;
 		};
 		T_Stack <TChartLine> st;
 	public:
@@ -450,7 +449,6 @@ namespace Graph_obj
 			CurrLine.pLine = this;
 			CurrLine.pFp = CurrLine.pLp = NULL;
 			CurrLine.IsVisited = false;
-			CurrLine.IsReturned = false;
 			st.Push(CurrLine);
 			while (!st.IsEmpty())
 			{
@@ -475,10 +473,9 @@ namespace Graph_obj
 						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.IsVisited = false;
-						CurrLine.IsReturned = false;
 					}
 				}
-				if (CurrLine.pLp == NULL && !CurrLine.IsReturned)
+				if (CurrLine.pLp == NULL)
 				{
 					t = CurrLine.pLine->GetLast();
 					q = dynamic_cast <TPoint*>(t);
@@ -494,11 +491,8 @@ namespace Graph_obj
 					}
 					else
 					{
-						CurrLine.IsReturned = true;
-						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.pFp = NULL;
-						CurrLine.IsReturned = false;
 						CurrLine.IsVisited = false;
 						st.Push(CurrLine);
 					}
@@ -538,7 +532,6 @@ namespace Graph_obj
 			CurrLine.pLine = this;
 			CurrLine.pFp = CurrLine.pLp = NULL;
 			CurrLine.IsVisited = false;
-			CurrLine.IsReturned = false;
 			st.Push(CurrLine);
 			while (!st.IsEmpty())
 			{
@@ -558,10 +551,9 @@ namespace Graph_obj
 						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.IsVisited = false;
-						CurrLine.IsReturned = false;
 					}
 				}
-				if (CurrLine.pLp == NULL && !CurrLine.IsReturned)
+				if (CurrLine.pLp == NULL)
 				{
 					t = CurrLine.pLine->GetLast();
 					q = dynamic_cast <TPoint*>(t);
@@ -572,11 +564,8 @@ namespace Graph_obj
 					}
 					else
 					{
-						CurrLine.IsReturned = true;
-						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.pFp = NULL;
-						CurrLine.IsReturned = false;
 						CurrLine.IsVisited = false;
 						st.Push(CurrLine);
 					}
@@ -596,7 +585,6 @@ namespace Graph_obj
 			CurrLine.pLine = this;
 			CurrLine.pFp = CurrLine.pLp = NULL;
 			CurrLine.IsVisited = false;
-			CurrLine.IsReturned = false;
 			st.Push(CurrLine);
 			while (!st.IsEmpty())
 			{
@@ -616,10 +604,9 @@ namespace Graph_obj
 						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.IsVisited = false;
-						CurrLine.IsReturned = false;
 					}
 				}
-				if (CurrLine.pLp == NULL && !CurrLine.IsReturned)
+				if (CurrLine.pLp == NULL)
 				{
 					t = CurrLine.pLine->GetLast();
 					q = dynamic_cast <TPoint*>(t);
@@ -630,11 +617,8 @@ namespace Graph_obj
 					}
 					else
 					{
-						CurrLine.IsReturned = true;
-						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.pFp = NULL;
-						CurrLine.IsReturned = false;
 						CurrLine.IsVisited = false;
 						st.Push(CurrLine);
 					}
@@ -653,7 +637,6 @@ namespace Graph_obj
 			CurrLine.pLine = this;
 			CurrLine.pFp = CurrLine.pLp = NULL;
 			CurrLine.IsVisited = false;
-			CurrLine.IsReturned = false;
 			st.Push(CurrLine);
 			while (!st.IsEmpty())
 			{
@@ -673,10 +656,9 @@ namespace Graph_obj
 						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.IsVisited = false;
-						CurrLine.IsReturned = false;
 					}
 				}
-				if (CurrLine.pLp == NULL && !CurrLine.IsReturned)
+				if (CurrLine.pLp == NULL)
 				{
 					t = CurrLine.pLine->GetLast();
 					q = dynamic_cast <TPoint*>(t);
@@ -687,11 +669,8 @@ namespace Graph_obj
 					}
 					else
 					{
-						CurrLine.IsReturned = true;
-						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.pFp = NULL;
-						CurrLine.IsReturned = false;
 						CurrLine.IsVisited = false;
 						st.Push(CurrLine);
 					}
@@ -710,7 +689,6 @@ namespace Graph_obj
 			CurrLine.pLine = this;
 			CurrLine.pFp = CurrLine.pLp = NULL;
 			CurrLine.IsVisited = false;
-			CurrLine.IsReturned = false;
 			st.Push(CurrLine);
 			while (!st.IsEmpty())
 			{
@@ -730,10 +708,9 @@ namespace Graph_obj
 						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.IsVisited = false;
-						CurrLine.IsReturned = false;
 					}
 				}
-				if (CurrLine.pLp == NULL && !CurrLine.IsReturned)
+				if (CurrLine.pLp == NULL)
 				{
 					t = CurrLine.pLine->GetLast();
 					q = dynamic_cast <TPoint*>(t);
@@ -744,11 +721,8 @@ namespace Graph_obj
 					}
 					else
 					{
-						CurrLine.IsReturned = true;
-						st.Push(CurrLine);
 						CurrLine.pLine = dynamic_cast <TChart*>(t);
 						CurrLine.pFp = NULL;
-						CurrLine.IsReturned = false;
 						CurrLine.IsVisited = false;
 						st.Push(CurrLine);
 					}
